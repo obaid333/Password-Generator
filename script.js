@@ -93,10 +93,18 @@ function getPasswordOptions() {
 
 }
 
+
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex]
 }
+
+//need an option for user to select number of characters between 8 and 128
+//should generate an array with that many random characters 
+
+var characterLength = []; //user deciders the number of characters
+
 
 // Function to generate password with user input
 function generatePassword() {
