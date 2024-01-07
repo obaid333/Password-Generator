@@ -100,16 +100,24 @@ function getRandom(arr) {
   return arr[randomIndex]
 }
 
-//need an option for user to select number of characters between 8 and 128
-//should generate an array with that many random characters 
+// need an option for user to select number of characters between 8 and 128
+// should generate an array with that many random characters 
 
 var characterLength = []; //user deciders the number of characters
 
+var allCharacters = []; //array to hold the names of all arrays
+allCharacters.push(upperCasedCharacters, lowerCasedCharacters, numericCharacters, specialCharacters)
+console.log(allCharacters);
 
-// Function to generate password with user input
+
+//Function to generate password with user input
 function generatePassword() {
-
+  var passwordCharacterArray = (allCharacters[getRandom])
+  var passwordCharacter = passwordCharacterArray[getRandom]
+  console.log(passwordCharacter);
+  
 }
+generatePassword()
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
