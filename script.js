@@ -90,34 +90,56 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  let characterLength = prompt("How many characters would you like?");
+  let uppercaseCharacters = confirm("Would you like Upper-Case characters to be included?");
+  let lowercaseCharacters = confirm("Would you like lower-Case characters to be included?");
+  let specialcaseCharacters = confirm("Would you like special characters to be included?");
+  let numbers = confirm("Would you like numbers to be included?");
 
+  return {
+    characterLength: characterLength,
+    includeUppercase: uppercaseCharacters,
+    includeLowercase: lowercaseCharacters,
+    includeSpecial: specialcaseCharacters,
+    includeNumbers: numbers
+  };
 }
+
+
+var allCharacters = []; //array to hold the names of all arrays
+function buildArray(userInput, addArray) {
+  if (userInput === true) {
+    allCharacters = allCharacters.concat(addArray)
+  }
+}
+
+var options = getPasswordOptions();
+
+buildArray(options.includeUppercase, upperCasedCharacters);
+buildArray(options.includeLowercase, lowerCasedCharacters);
+buildArray(options.includeSpecial, specialCharacters);
+buildArray(options.includeNumbers, numericCharacters);
+
+console.log(allCharacters);
 
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  const randomIndex = Math.floor(Math.random() * arr.length);
+  var randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex]
 }
 
 // need an option for user to select number of characters between 8 and 128
 // should generate an array with that many random characters 
 
-var characterLength = []; //user deciders the number of characters
-
-var allCharacters = []; //array to hold the names of all arrays
-allCharacters.push(upperCasedCharacters, lowerCasedCharacters, numericCharacters, specialCharacters)
-console.log(allCharacters);
-
-
 //Function to generate password with user input
 function generatePassword() {
-  var passwordCharacterArray = (allCharacters[getRandom])
-  var passwordCharacter = passwordCharacterArray[getRandom]
-  console.log(passwordCharacter);
-  
+  var passwordCharacterArray = [];
+  for (var i = 0; i < options.characterLength; i++) {
+    passwordCharacterArray.push(getRandom(allCharacters));
+  }
+  return passwordCharacterArray.join(''); // Return the generated password
 }
-generatePassword()
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
