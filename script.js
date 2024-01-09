@@ -90,11 +90,37 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let characterLength = prompt("How many characters would you like?");
+  let characterLength = 8; // Default value, you can adjust it based on your preferences
+
+  while (true) {
+    characterLength = prompt("How many characters would you like?", characterLength);
+
+    if (characterLength === null) {
+      // User pressed Cancel, handle it accordingly (e.g., provide a default length)
+      characterLength = 8; // Default value
+      break;
+    }
+
+    if (characterLength >= 8 && characterLength <= 128) {
+      break;
+    } else {
+      alert("Password length must be between 8 and 128 characters.");
+    }
+  }
   let uppercaseCharacters = confirm("Would you like Upper-Case characters to be included?");
   let lowercaseCharacters = confirm("Would you like lower-Case characters to be included?");
   let specialcaseCharacters = confirm("Would you like special characters to be included?");
   let numbers = confirm("Would you like numbers to be included?");
+
+  while (!(uppercaseCharacters || lowercaseCharacters || specialcaseCharacters || numbers)) {
+    alert("Please select at least one type of characters to be included in the password");
+  
+    // Prompt again for character types
+    uppercaseCharacters = confirm("Would you like Upper-Case characters to be included?");
+    lowercaseCharacters = confirm("Would you like lower-Case characters to be included?");
+    specialcaseCharacters = confirm("Would you like special characters to be included?");
+    numbers = confirm("Would you like numbers to be included?");
+  } 
 
   return {
     characterLength: characterLength,
@@ -128,9 +154,6 @@ function getRandom(arr) {
   var randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex]
 }
-
-// need an option for user to select number of characters between 8 and 128
-// should generate an array with that many random characters 
 
 //Function to generate password with user input
 function generatePassword() {
